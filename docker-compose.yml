@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine  # Versão leve do PostgreSQL
+    container_name: postgres
+    environment:
+      DB_USER: postgres       # Usuário padrão
+      DB_PASSWORD: postgres   # Senha (altere para produção!)
+      DB_DATABASEB: sales           # Nome do banco de dados
+    ports:
+      - "5432:5432"  # Porta exposta (host:container)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistência de dados
+    restart: unless-stopped  # Reinicia automaticamente
+
+volumes:
+  postgres_data:  # Volume para persistir dados mesmo se o container for removido
